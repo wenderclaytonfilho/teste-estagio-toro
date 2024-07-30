@@ -20,7 +20,34 @@ import pandas as pd
 data_frame = pd.read_csv('transacoes (3).csv')
 
 
-#Separando o dataframe de acordo com o tipo (Compra ou Venda)
-compras_df = data_frame[(data_frame['Tipo'] == 'Compra')]  
+#Calculando os valores de Compra e Venda.
 
-vendas_df = data_frame[(data_frame['Tipo'] == 'Venda')]   
+valor_total_compra = data_frame[data_frame['Tipo']=='Compra']['Valor'].sum()
+valor_total_venda = data_frame[data_frame['Tipo']=='Venda']['Valor'].sum()
+
+#Calculando a quantidade de Compras e Vendas.
+
+quantidade_compras = len(data_frame[data_frame['Tipo'] == 'Compra'])
+quantidade_vendas = len(data_frame[data_frame['Tipo']=='Venda'])
+
+#Salvando o arquivo ordenado por data de maneira decrescente.
+
+novo_data_frame = data_frame.sort_values(by='Data', ascending=False)
+novo_data_frame_local = 'transacoes(Ordenadas).csv'
+
+novo_data_frame.to_csv(novo_data_frame_local, index=False)
+
+
+
+print(f'''
+      
+      O Arquivo foi ordenado e salvo em: transacoes(Ordenadas).csv
+
+      -----=Output=-----
+
+    -Valor Total das compras: R$ {valor_total_compra}
+    -Valor Total das Vendas: R$ {valor_total_venda} 
+    -Quantidade de Compras: {quantidade_compras}
+    -Quantidade de Vendas: {quantidade_vendas}
+    
+''')
