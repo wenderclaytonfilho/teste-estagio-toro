@@ -17,11 +17,12 @@ Você recebeu um arquivo CSV chamado “transacoes.csv” contendo informações
 
 import pandas as pd
 
-#Lendo o arquivo transacoes (3).csv
-data_frame = pd.read_csv('transacoes (3).csv')
+#Lendo o arquivo transacoes.csv
+data_frame = pd.read_csv('transacoes.csv')
 
 
-#Calculando os valores de Compra e Venda.
+'''Por questão de organização, separei os dataframes de compra e vendas para poder calcular 
+o valor, mas isso poderia ter sido feito em apenas uma linha de código..'''
 
 compras_df = data_frame[data_frame['Tipo']=='Compra']
 vendas_df = data_frame[data_frame['Tipo']=='Venda']
@@ -30,15 +31,12 @@ valor_total_compras = compras_df['Valor'].sum()
 valor_total_vendas = vendas_df['Valor'].sum()
 
 #Calculando a quantidade de Compras e Vendas.
-
 quantidade_compras = len(data_frame[data_frame['Tipo'] == 'Compra'])
 quantidade_vendas = len(data_frame[data_frame['Tipo']=='Venda'])
 
 #Aqui estou salvando o novo arquivo ordenado por data de maneira decrescente.
-
 novo_data_frame = data_frame.sort_values(by='Data', ascending=False)
 novo_data_frame_local = 'transacoes(Ordenadas).csv'
-
 novo_data_frame.to_csv(novo_data_frame_local, index=False)
 
 
@@ -47,8 +45,7 @@ print(f'''
       
       O Arquivo foi ordenado e salvo em: transacoes(Ordenadas).csv
 
-      -----=Output=-----
-    {vendas_df}
+      -----=Resultado=-----
     -Valor Total das compras: R$ {valor_total_compras}
     -Valor Total das Vendas: R$ {valor_total_vendas} 
     -Quantidade de Compras: {quantidade_compras}
